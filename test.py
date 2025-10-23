@@ -1,6 +1,6 @@
 """Student grading system."""
 
-class Student
+class Student:
     """Represents a student with grades and status."""
 
     def __init__(self, student_id: str, name: str):
@@ -73,8 +73,8 @@ class Student
                     return True
             print(f"No se encontró la nota {value}. No se eliminó.")
             return False
-        except Exception as e:
-            print(f"Error al eliminar por valor: {e}")
+        except (TypeError, ValueError, IndexError)  as e:
+            print(f"Error al eliminar: {e}")
             return False
 
     def remove_grade_by_index(self, index: int) -> bool:
@@ -122,8 +122,11 @@ def start_run():
     student1.add_grade(95)
     student1.add_grade(72.5)
     student1.add_grade("Fifty")  # Invalid input handled
+    student1.add_grade(99)
+    student1.remove_grade_by_value("99")
+    student1.remove_grade_by_index(2)
     student1.delete_grade(5)  # Invalid index handled
-    student1.report()
+    print(student1.summary())
 
 
 if __name__ == "__main__":
